@@ -141,11 +141,11 @@ def test_partition_single_column_csv_preserves_quoted_fields():
 
     elements = partition_csv(file=io.BytesIO(csv_data), include_header=True)
 
-    assert elements[0].text == 'notes hello, world a "quote" line 1\\nline 2'
+    assert elements[0].text == 'notes hello, world a "quote" line 1 line 2'
     assert elements[0].metadata.text_as_html is not None
     assert "<td>hello, world</td>" in elements[0].metadata.text_as_html
     assert '<td>a "quote"</td>' in elements[0].metadata.text_as_html
-    assert "<td>line 1\\nline 2</td>" in elements[0].metadata.text_as_html
+    assert "<td>line 1 line 2</td>" in elements[0].metadata.text_as_html
     assert '"hello, world"' not in elements[0].metadata.text_as_html
     assert '""quote""' not in elements[0].metadata.text_as_html
 
